@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VelociShield</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      width: 280px;
+      height: 300px;
+      padding: 15px;
+    }
+
+    .header {
+      font-size: 20px;
+      font-weight: bold;
+      color: #38bdf8;
+      text-align: center;
+    }
+
+    .status {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .safe {
+      background: #064e3b;
+      color: #6ee7b7;
+    }
+
+    .danger {
+      background: #7f1d1d;
+      color: #fecaca;
+    }
+
+    .loading {
+      background: #1e293b;
+      color: #93c5fd;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .footer {
+      font-size: 11px;
+      margin-top: 15px;
+      opacity: 0.7;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">🛡️ VelociShield</div>
+
+  <div id="statusBox" class="status loading">
+    Scanning current site...
+  </div>
+
+  <button id="scanBtn">Scan Again</button>
+
+  <div class="footer">
+    Real-time phishing protection
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

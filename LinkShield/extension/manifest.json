@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "VelociShield",
+  "description": "Real-time phishing & malicious URL detector",
+  "version": "1.0",
+
+  "permissions": [
+  "tabs",
+  "storage"
+],
+"host_permissions": [
+  "<all_urls>",
+  "http://127.0.0.1:8000/*"
+],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "VelociShield"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
