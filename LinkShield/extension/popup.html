@@ -2,87 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>VelociShield</title>
+  <title>LinkShield</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: white;
-      width: 280px;
-      height: 300px;
-      padding: 15px;
+      width: 320px;
+      height: 400px;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .header {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
       color: #38bdf8;
       text-align: center;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .shield-icon {
+      font-size: 28px;
     }
 
     .status {
-      margin-top: 25px;
-      padding: 15px;
-      border-radius: 10px;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
       text-align: center;
       font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
     }
 
     .safe {
-      background: #064e3b;
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
       color: #6ee7b7;
+      border: 2px solid #10b981;
     }
 
     .danger {
-      background: #7f1d1d;
+      background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
       color: #fecaca;
+      border: 2px solid #ef4444;
     }
 
     .loading {
-      background: #1e293b;
-      color: #93c5fd;
+      background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+      color: #d1d5db;
+      border: 2px solid #6b7280;
     }
 
-    button {
-      margin-top: 20px;
+    .scan-btn {
       width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-      background: #2563eb;
-      color: white;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    .footer {
-      font-size: 11px;
+      padding: 12px;
       margin-top: 15px;
-      opacity: 0.7;
-      text-align: center;
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .scan-btn:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    }
+
+    .scan-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .details {
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .confidence-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+      margin: 8px 0;
+      overflow: hidden;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="header">🛡️ VelociShield</div>
-
-  <div id="statusBox" class="status loading">
-    Scanning current site...
+  <div class="header">
+    <span class="shield-icon">🛡️</span>
+    LinkShield
   </div>
-
-  <button id="scanBtn">Scan Again</button>
-
-  <div class="footer">
-    Real-time phishing protection
+  
+  <div id="statusBox" class="status loading pulse">
+    Initializing scanner...
   </div>
-
+  
+  <div class="confidence-bar">
+    <div id="confidenceBar" class="confidence-fill" style="width: 0%; background: #6b7280;"></div>
+  </div>
+  
+  <div id="details" class="details" style="display: none;"></div>
+  
+  <button id="scanBtn" class="scan-btn">🔍 Scan Current Site</button>
+  
+  <script src="debug.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "VelociShield",
+  "name": "LinkShield",
   "description": "Real-time phishing & malicious URL detector",
   "version": "1.0",
 
@@ -19,7 +19,7 @@
 
   "action": {
     "default_popup": "popup.html",
-    "default_title": "VelociShield"
+    "default_title": "LinkShield"
   },
 
   "content_scripts": [

@@ -8,12 +8,26 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
       body: JSON.stringify({ url: tab.url })
     });
 
-    const result = await response.json();
+    // Read response safely
+    const text = await response.text();
+    let result;
 
-    if (result.risk === "high") {
+    try {
+      result = JSON.parse(text);
+    } catch (err) {
+      console.error("Invalid JSON from backend:", text);
+      return;
+    }
+
+    // Safety check
+    if (!result || !result.risk) return;
+
+    // 🔥 Show warning only if high risk
+    if (result.risk === "HIGH") {
       chrome.tabs.sendMessage(tabId, {
         action: "SHOW_WARNING",
-        risk: result.score
+        risk: result.risk,
+        confidence: result.confidence
       });
     }
 

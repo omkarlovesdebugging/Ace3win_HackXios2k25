@@ -1,29 +1,32 @@
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "SHOW_WARNING") {
-    showOverlay(message.risk);
+    showOverlay(message.risk, message.confidence);
   }
 });
 
-function showOverlay(riskScore) {
+function showOverlay(riskLevel, confidence) {
   if (document.getElementById("velocishield-overlay")) return;
 
-  // Create blur layer
+  // Blur layer
   const blurLayer = document.createElement("div");
   blurLayer.id = "vs-blur-layer";
 
-  // Create overlay container
+  // Overlay container
   const overlay = document.createElement("div");
   overlay.id = "velocishield-overlay";
+
+  const confidencePercent = Math.round(confidence * 100);
 
   overlay.innerHTML = `
     <div class="vs-box">
       <div class="pulse-ring"></div>
 
       <h1>⚠️ Suspicious Website</h1>
-      <p>This page shows phishing-like behavior.</p>
+      <p>This website may be unsafe.</p>
 
       <div class="risk">
-        Risk Level: <b>${riskScore}/3</b>
+        <b>Risk Level:</b> ${riskLevel}<br/>
+        <b>Confidence:</b> ${confidencePercent}%
       </div>
 
       <div class="buttons">
@@ -62,7 +65,7 @@ function showOverlay(riskScore) {
       width: 340px;
       text-align: center;
       color: white;
-      box-shadow: 0 0 60px rgba(59, 130, 246, 0.6);
+      box-shadow: 0 0 60px rgba(239, 68, 68, 0.6);
       animation: popIn 0.4s ease;
     }
 
