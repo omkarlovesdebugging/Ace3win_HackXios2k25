@@ -1,4 +1,4 @@
-// App.js - System-Wide Phishing Protection Service
+// App.js - System-Wide Phishing Protection Services
 
 import { useState, useEffect } from 'react';
 import {
