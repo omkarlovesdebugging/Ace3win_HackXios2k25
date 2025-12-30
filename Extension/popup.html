@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Security Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h3>🛡️ Security Status</h3>
+  </header>
+  
+  <main>
+    <section id="currentStatus">
+      <div id="loading" style="display:none;">
+        <div class="loading-spinner">🔄</div>
+        <p>Analyzing security...</p>
+      </div>
+      <div id="result"></div>
+    </section>
+
+    <section id="historySection">
+      <h4>Recent Analysis</h4>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
