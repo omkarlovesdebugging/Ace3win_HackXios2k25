@@ -25,9 +25,11 @@ app.add_middleware(
 )
 
 # Load pre-trained ML components
-feature_scaler = joblib.load("scaler.pkl")
+import os
+model_path = os.path.dirname(__file__)
+feature_scaler = joblib.load(os.path.join(model_path, "scaler.pkl"))
 ml_classifier = xgb.Booster()
-ml_classifier.load_model("xgb_model.json")
+ml_classifier.load_model(os.path.join(model_path, "xgb_model.json"))
 
 # Define expected feature order for model input
 REQUIRED_FEATURES = [
@@ -112,4 +114,8 @@ def analyze_url(request: URLAnalysisRequest):
 
 @app.get("/")
 def service_status():
-    return {"message": "URL Security Analysis API - Service Active", "version": "1.0.0"}
+    return {"message": "URL Security Analysis API - Service Active", "version": "1.0.0", "status": "deployed"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "service": "linkshield-backend"}

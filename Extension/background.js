@@ -8,7 +8,7 @@ const CONFIG = {
   MAX_SCAN_HISTORY: 10,
   DEBOUNCE_DELAY: 500,
   CLEANUP_INTERVAL: 30 * 60 * 1000, // 30 minutes
-  API_ENDPOINT: "http://127.0.0.1:8000/predict_url"
+  API_ENDPOINT: "https://linkshield-backend-edrp.onrender.com/predict_url"
 };
 
 // Tab state management
@@ -523,8 +523,8 @@ setInterval(() => {
 // Check if local backend server is running on startup
 async function checkBackendServer() {
   try {
-    console.log("Checking if local backend server is running...");
-    const response = await fetch("http://127.0.0.1:8000/", {
+    console.log("Checking if backend server is running...");
+    const response = await fetch("https://linkshield-backend-edrp.onrender.com/", {
       method: "GET",
       headers: { "Accept": "application/json" }
     });
@@ -536,10 +536,9 @@ async function checkBackendServer() {
       console.warn("⚠️ Backend server responded with status:", response.status);
     }
   } catch (error) {
-    console.error("❌ Backend server is not running or not accessible");
-    console.error("Please start the backend server by running:");
-    console.error("  cd backend");
-    console.error("  python -m uvicorn main:app --reload --host 127.0.0.1 --port 8000");
+    console.error("❌ Backend server is not accessible:", error.message);
+    console.error("Please check if the backend is deployed correctly at:");
+    console.error("  https://linkshield-backend-edrp.onrender.com");
   }
 }
 
